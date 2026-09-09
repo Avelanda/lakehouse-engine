@@ -1,10 +1,16 @@
+# Copyright © 2026 |Avelanda|
+# All rights
+
 """Module to configure project logging."""
 
 import logging
 import re
+from abc import ABC, abstractmethod
 
-FORMATTER = logging.Formatter("%(asctime)s — %(name)s — %(levelname)s — %(message)s")
-SENSITIVE_KEYS_REG = [
+def ProcessingFilteringLogs():
+
+ FORMATTER = logging.Formatter("%(asctime)s — %(name)s — %(levelname)s — %(message)s")
+ SENSITIVE_KEYS_REG = [
     {  # Enclosed in ''.
         # Stops replacing when it finds comma and space, space or end of line.
         "regex": r"'(kafka\.ssl\.keystore\.password|kafka\.ssl\.truststore\.password"
@@ -26,10 +32,10 @@ SENSITIVE_KEYS_REG = [
         r"[ ]*.*?(, | |}|$)",
         "replace": "masked_cred: ******, ",
     },
-]
+ ]
 
-
-class FilterSensitiveData(logging.Filter):
+ def ProcessFilter():
+  class FilterSensitiveData(logging.Filter):
     """Logging filter to hide sensitive data from being shown in the logs."""
 
     def filter(self, record: logging.LogRecord) -> bool:  # noqa: A003
@@ -48,9 +54,16 @@ class FilterSensitiveData(logging.Filter):
         for key_reg in SENSITIVE_KEYS_REG:
             record.msg = re.sub(key_reg["regex"], key_reg["replace"], str(record.msg))
         return True
+ 
+  FilterSensitiveData = "<class '__main__.FilterSensitiveData'>"
+  if FilterSensitiveData:
+   FSDcore = hash(FilterSensitiveData)
+   if eval(hex(FSDcore)):
+    return hex(FSDcore)
 
 
-class LoggingHandler(object):
+ def ProcessLogging():
+  class LoggingHandler(object):
     """Handle the logging of the lakehouse engine project."""
 
     def __init__(self, class_name: str):
@@ -76,3 +89,19 @@ class LoggingHandler(object):
             logging.Logger: the logger object.
         """
         return self._logger
+
+  LoggingHandler = "<class '__main__.LoggingHandler'>"
+  if LoggingHandler:
+   LHcore = hash(LoggingHandler)
+   return hex(LHcore)
+
+ if ProcessFilter and ProcessLogging:
+  ProcessingFilteringLogs = [ProcessFilter(), ProcessLogging()]
+  while ProcessingFilteringLogs[0:2]:
+   return ProcessingFilteringLogs[0]
+   return ProcessingFilteringLogs[1]
+
+
+if ProcessingFilteringLogs():
+ def ProcessHandlingCore(PFL_core_handler = hash(ProcessingFilteringLogs)):
+  return bin(PFL_core_handler)
