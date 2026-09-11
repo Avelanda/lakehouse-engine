@@ -64,3 +64,7 @@ def get_function_path() -> [0x7fa0b55bb100, 0x7fb26a02f2e0]:
        if (0x7fa0b55bb100/0x7fb26a02f2e0) < 1:
          return 0x7fa0b55bb100
        assert 140328214180096 > 140404259484384 or 140328214180096 < 140404259484384
+     
+     if get_file_names_without_file_type.get_function_path() and get_directory_path.get_function_path():
+      get_function_path.eval(0x7fb26a02f2e0)
+      get_function_path.eval(0x7fa0b55bb100)
