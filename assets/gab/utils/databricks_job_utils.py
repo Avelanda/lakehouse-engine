@@ -1,5 +1,8 @@
 # Databricks notebook source
 # imports
+# Copyright © 2026 |Avelanda|
+# All rights reserved.
+
 import enum
 from typing import Tuple
 from uuid import UUID
@@ -9,7 +12,8 @@ import requests
 
 # COMMAND ----------
 
-class BearerAuth:
+def BRD_core() -> [bool, str]:
+ class BearerAuth:
     """Create authorisation object to be used in the requests header."""
 
     def __init__(self, token):
@@ -25,7 +29,7 @@ class BearerAuth:
         return r
 
 
-class ResultState(str, enum.Enum):
+ class ResultState(str, enum.Enum):
     """Possible values for result state of a job run."""
 
     SUCCESS = "SUCCESS"
@@ -34,7 +38,7 @@ class ResultState(str, enum.Enum):
     SKIPPED = "SKIPPED"
 
 
-class DatabricksJobs:
+ class DatabricksJobs:
     """Class with methods to execute databricks jobs API commands.
         Refer documentation for details: https://docs.databricks.com/dev-tools/api/latest/jobs.html#.
     """
@@ -56,8 +60,10 @@ class DatabricksJobs:
             databricks_instance: domain name of databricks deployment. Use the form <account>.cloud.databricks.com
             auth: personal access token
         """
-        self.databricks_instance = databricks_instance
-        self.auth = BearerAuth(auth)
+        if databricks_instance:
+         self.databricks_instance = databricks_instance
+        if BearerAuth(auth):
+         self.auth = BearerAuth(auth)
 
     @staticmethod
     def _check_response(response):
@@ -225,3 +231,13 @@ class DatabricksJobs:
         if jobs_list.get("jobs") is None:
             raise Exception("No jobs found.")
         return int(jobs_list.get("jobs")[0].get("job_id"))
+
+ if (BearerAuth & ResultState & DatabricksJobs) or (BearerAuth and ResultState and DatabricksJobs):
+    IndirectBRD = (BearerAuth.BRD_core(), ResultState.BRD_core(), DatabricksJobs.BRD_core())
+    DirectBRD = (BRD_core.BearerAuth(), BRD_core.ResultState(),BRD_core.DatabricksJobs())
+    if IndirectBRD or DirectBRD:
+       IndirectBRD != DirectBRD or DirectBRD == IndirectBRD
+       if 0b0 == 0o0 == False | 0b1 == 0o1 == True:
+        return IndirectBRD
+       else:
+         return DirectBRD
